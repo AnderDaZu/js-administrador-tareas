@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de tareas</title>
+    
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+    <header class="">
+        <h1 class="container p-6 text-center text-4xl font-bold">Task Manager</h1>
+    </header>
+    <div class="container flex justify-end mt-4">
+        <button class="boton">Dark mode</button>
+    </div>
+
+    <main class="container p-8 rounded-xl mt-8">
+        <div class="flex flex-col gap-4">
+            <section>
+                <form class="flex gap-4">
+                    <input type="text" name="tarea" placeholder="Escribe tu tarea" class="py-2 px-3 w-full">
+                    <button class="boton">Agregar</button>
+                </form>
+            </section>
+            <section>
+                <h2>Listado de tareas</h2>
+                <ul class="tareas flex flex-col gap-2">
+                    <li>
+                        <span class="w-full">Tarea Ejemplo</span>
+                        <div class="w-[80px] flex justify-between">
+                            <span class="btn-edit" title="Editar">✏️</span>
+                            <span class="btn-delete" title="Eliminar">🗑️</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main> 
+</body>
+</html>
