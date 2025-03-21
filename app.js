@@ -8,14 +8,14 @@ const TIPOMENSAJE = {
     info: 'Información',
     question: 'Pregunta'
 }
-const mensaje = (mensaje = 'Mensaje por defecto', tipoIcon = 'info') => {
+const mensaje = (mensaje = 'Mensaje por defecto', tipoIcon = 'info', timer = 3000) => {
     if (!Object.keys(TIPOMENSAJE).includes(tipoIcon)) return console.error('Ingrese un tipoIcon valido...');
 
     Swal.fire({
         title: TIPOMENSAJE[tipoIcon],
         text: mensaje,
         icon: tipoIcon,
-        timer: 3000, // Se cierra en 3000ms (3 segundos)
+        timer, // Se cierra en 3000ms (3 segundos)
         showConfirmButton: false // Oculta el botón de confirmación
     });
 }
@@ -95,11 +95,29 @@ const editTask = (task) => {
         }
     });
 }
+const storeTaskInLocalStorage = (task) => {
+    const itemTasksLocalStorage = JSON.parse(localStorage.getItem('tasks') || "[]");
+    itemTasksLocalStorage.push(task);
+    localStorage.setItem('tasks', JSON.stringify(itemTasksLocalStorage));
+}
+const loadTasks = () => {
+    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+
+    if (tasks.length > 0) {
+        tasks.forEach(task => {
+            taskList.prepend(createTaskElement(task));
+        });
+    } else {
+        mensaje('Aún no hay tareas guardadas', 'info', 1500)
+    }
+}
 
 const form = document.getElementById('task-form');
 const taskList = document.getElementById('task-list');
 const inputForm = form.tarea;
 const buttonForm = form.querySelector('button');
+
+loadTasks();
 
 inputForm.addEventListener('input', () => {
     buttonForm.disabled = inputForm.value.trim() === '';
@@ -114,6 +132,7 @@ form.addEventListener('submit', (event) => {
     if (!validateTaskValue(taskInputValue)) return;
 
     taskList.prepend(createTaskElement(taskInputValue));
+    storeTaskInLocalStorage(taskInputValue);
 
     mensaje('Tarea se agrego correctamente', 'success')
 
