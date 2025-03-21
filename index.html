@@ -22,14 +22,14 @@
             <section>
                 <form id="task-form" class="flex gap-4">
                     <input id="task-input" type="text" name="tarea" placeholder="Escribe tu tarea" class="py-2 px-3 w-full">
-                    <button class="boton">Agregar</button>
+                    <button class="boton" disabled>Agregar</button>
                 </form>
             </section>
             <section>
                 <h2>Listado de tareas</h2>
                 <ul id="task-list" class="tareas flex flex-col gap-2">
                     <li>
-                        <span class="w-full">Tarea Ejemplo</span>
+                        <span name="task-content" class="w-full">Tarea Ejemplo</span>
                         <div class="w-[80px] flex justify-between">
                             <span class="btn-edit" title="Editar">✏️</span>
                             <span class="btn-delete" title="Eliminar">🗑️</span>
@@ -40,6 +40,7 @@
         </div>
     </main> 
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./app.js"></script>
 </body>
 </html>

@@ -39,6 +39,12 @@ body {
     box-shadow: 0 0 2px #13293D50;
     transform: scale(0.98);
 }
+.boton:disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.5;
+}
 .boton-dark {
     background-color: #1B98E090;
 }
