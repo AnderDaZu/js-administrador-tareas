@@ -73,6 +73,7 @@ const ConfirmDeletetask = (task) => {
         if (result.isConfirmed) {
             console.log("El usuario confirmó");
             task.remove();
+            removeTaskLocalStorage(textContent);
         }
     });
 }
@@ -87,6 +88,7 @@ const editTask = (task) => {
     }).then((result) => {
         if (result.isConfirmed) {
             if (validateTaskValue(result.value, 'editar')) {
+                updateTaskLocalStorage(task.children[0].textContent, result.value);
                 task.children[0].textContent = result.value;
                 mensaje(`Tarea se actualizo correctamente`, 'success')
             } else {
@@ -110,6 +112,20 @@ const loadTasks = () => {
     } else {
         mensaje('Aún no hay tareas guardadas', 'info', 1500)
     }
+}
+const removeTaskLocalStorage = (task) => {
+    const itemTasksLocalStorage = JSON.parse(localStorage.getItem('tasks') || "[]");
+    const index = itemTasksLocalStorage.indexOf(task);
+    itemTasksLocalStorage.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(itemTasksLocalStorage));
+
+    loadTasks();
+}
+const updateTaskLocalStorage = (task, newValue) => {
+    const itemTasksLocalStorage = JSON.parse(localStorage.getItem('tasks') || "[]");
+    const index = itemTasksLocalStorage.indexOf(task);
+    itemTasksLocalStorage[index] = newValue;
+    localStorage.setItem('tasks', JSON.stringify(itemTasksLocalStorage));
 }
 
 const form = document.getElementById('task-form');
