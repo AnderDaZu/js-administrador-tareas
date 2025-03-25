@@ -118,8 +118,6 @@ const removeTaskLocalStorage = (task) => {
     const index = itemTasksLocalStorage.indexOf(task);
     itemTasksLocalStorage.splice(index, 1);
     localStorage.setItem('tasks', JSON.stringify(itemTasksLocalStorage));
-
-    loadTasks();
 }
 const updateTaskLocalStorage = (task, newValue) => {
     const itemTasksLocalStorage = JSON.parse(localStorage.getItem('tasks') || "[]");
@@ -132,6 +130,7 @@ const form = document.getElementById('task-form');
 const taskList = document.getElementById('task-list');
 const inputForm = form.tarea;
 const buttonForm = form.querySelector('button');
+const btnDarkMode = document.getElementById('btn-dark-mode');
 
 loadTasks();
 
@@ -149,6 +148,7 @@ form.addEventListener('submit', (event) => {
 
     taskList.prepend(createTaskElement(taskInputValue));
     storeTaskInLocalStorage(taskInputValue);
+    buttonForm.disabled = true;
 
     mensaje('Tarea se agrego correctamente', 'success')
 
@@ -171,3 +171,14 @@ taskList.addEventListener('click', (event) => {
     }
 });
 
+btnDarkMode.addEventListener('click', () => {
+    document.body.classList.toggle('bg-dark');
+    document.querySelectorAll('.boton').forEach(boton => boton.classList.toggle('boton-dark'));
+    const theme = document.body.classList.contains('bg-dark') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+});
+
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('bg-dark');
+    document.querySelectorAll('.boton').forEach(boton => boton.classList.add('boton-dark'));
+}

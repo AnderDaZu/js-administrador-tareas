@@ -6,7 +6,7 @@ html {
 }
 .bg-dark {
     background-image: linear-gradient(to top, #006494 0%, #006494 100%);
-    color: #E8F1F2;
+    /* color: #E8F1F2; */
 }
 body {
     font-family: poppins, sans-serif;
