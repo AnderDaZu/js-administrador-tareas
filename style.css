@@ -8,13 +8,36 @@ html {
     background-image: linear-gradient(to top, #006494 0%, #006494 100%);
     /* color: #E8F1F2; */
 }
+
 body {
     font-family: poppins, sans-serif;
     font-size: 18px;
     background-image: linear-gradient(to top, #E8F1F2 0%, #1B98E0 100%);
     color: #13293D;
     min-height: 100vh;
+
+    --sb-track-color: #232E33;
+    --sb-thumb-color: #81868a;
+    --sb-size: 10px;
 }
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 50px;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 50px;
+}
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-color: var(--sb-thumb-color)
+                        var(--sb-track-color);
+    }
+}
+
 .container {
     max-width: 1000px;
     margin-left: auto;
